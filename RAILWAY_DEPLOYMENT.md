@@ -141,6 +141,14 @@ Before pushing, make sure these are not committed:
 uvicorn app.main:app --host 0.0.0.0 --port $PORT
 ```
 
+For Render, set this environment variable in the backend service:
+
+```text
+PYTHON_VERSION=3.11.9
+```
+
+The repository also contains `runtime.txt` files for both the repository root and `/backend`. The environment variable is the authoritative Render setting. Python 3.11.9 is required by the currently pinned Pydantic dependencies. Without this pin, Render may select Python 3.14 and attempt to compile `pydantic-core` from Rust during deployment.
+
 Railway supplies the `$PORT` variable. Do not hard-code port `8000` in the production command.
 
 8. Deploy the service.
